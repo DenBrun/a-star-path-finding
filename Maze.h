@@ -7,8 +7,8 @@ class Maze
 {
 private:
     vector<vector<int>> maze_vector;
-    bool in_bounds(Location loc);
-    bool passable(Location loc);
+    bool in_bounds(Node loc);
+    bool passable(Node loc);
 
 public:
     Maze(vector<vector<int>> maze_vector);

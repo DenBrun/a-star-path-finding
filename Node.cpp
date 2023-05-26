@@ -1,13 +1,13 @@
 #include "Node.h"
 
-Node::Node(int x, int y) : location(Location{x, y}), came_from(nullptr), cost(0){};
-
-Location Node::getLocation()
-{
-    return this->location;
-}
+Node::Node(int x, int y) : x(x), y(y){};
 
 bool Node::operator==(Node n)
 {
-    return this->location.x == n.getLocation().x && this->location.y == n.getLocation().y;
+    return this->x == n.x && this->y == n.y;
+}
+
+Node Node::operator+(const Node other)
+{
+    return Node(this->x + other.x, this->y + other.y);
 }

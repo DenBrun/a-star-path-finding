@@ -1,19 +1,9 @@
-struct Location
-{
-    int x;
-    int y;
-};
-
 class Node
 {
 private:
-    // int x, y;
-    Location location;
-    Node *came_from;
-    float cost;
-
 public:
+    int x, y;
     Node(int x, int y);
-    Location getLocation();
     bool operator==(Node n);
+    Node operator+(const Node other);
 };
