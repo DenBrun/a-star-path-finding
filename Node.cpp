@@ -6,3 +6,8 @@ Location Node::getLocation()
 {
     return this->location;
 }
+
+bool Node::operator==(Node n)
+{
+    return this->location.x == n.getLocation().x && this->location.y == n.getLocation().y;
+}

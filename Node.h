@@ -15,4 +15,5 @@ private:
 public:
     Node(int x, int y);
     Location getLocation();
+    bool operator==(Node n);
 };
