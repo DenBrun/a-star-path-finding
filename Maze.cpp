@@ -1,5 +1,6 @@
 #include "Maze.h"
 #include <iostream>
+#include <algorithm>
 
 Maze::Maze(vector<vector<int>> maze_vector)
 {
@@ -28,4 +29,49 @@ void Maze::print()
     }
     cout << endl
          << ']' << endl;
+}
+
+bool Maze::in_bounds(Location loc)
+{
+    return this->maze_vector.size() > loc.y && this->maze_vector[loc.y].size() > loc.x;
+}
+
+bool Maze::passable(Location loc)
+{
+    return this->maze_vector[loc.y][loc.x] != 0;
+}
+
+vector<Node> Maze::get_neighbors(Node node)
+{
+    if (!this->in_bounds(node.getLocation()) || !this->passable(node.getLocation()))
+    {
+        return {};
+    }
+
+    // Node directions[4] = {Node(1, 0),
+    //                       Node(-1, 0),
+    //                       Node(0, -1),
+    //                       Node(0, 1)};
+    Location directions[4] = {Location{1, 0},
+                              Location{-1, 0},
+                              Location{0, -1},
+                              Location{0, 1}};
+
+    vector<Node> results;
+
+    for (auto &dir : directions)
+    {
+        Location next{node.getLocation().x + dir.x, node.getLocation().y + dir.y};
+        if (in_bounds(next) && passable(next))
+        {
+            results.push_back(Node(next.x, next.y));
+        }
+    }
+
+    if ((node.getLocation().x + node.getLocation().y) % 2 == 0)
+    {
+        reverse(results.begin(), results.end());
+    }
+
+    return results;
 }

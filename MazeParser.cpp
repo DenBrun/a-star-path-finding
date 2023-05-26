@@ -22,11 +22,11 @@ Maze MazeParser::parseMazeFile(const string &filename)
             char c = line[i];
             if (c == 'X')
             {
-                row.push_back(1);
+                row.push_back(0);
             }
             else if (c == ' ')
             {
-                row.push_back(0);
+                row.push_back(1);
             }
         }
         if (!row.empty())
