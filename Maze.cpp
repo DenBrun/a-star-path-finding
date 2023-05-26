@@ -1,6 +1,19 @@
 #include "Maze.h"
+#include "PriorityQueue.h"
 #include <iostream>
 #include <algorithm>
+
+namespace std
+{
+    template <>
+    struct hash<Node>
+    {
+        size_t operator()(const Node &n) const noexcept
+        {
+            return hash<int>()(n.x ^ (n.y << 16));
+        }
+    };
+}
 
 Maze::Maze(vector<vector<int>> maze_vector)
 {
@@ -70,4 +83,59 @@ vector<Node> Maze::get_neighbors(Node node)
     }
 
     return results;
+}
+
+vector<Node> Maze::find_shortest_path(Node start, Node end)
+{
+    PriorityQueue<Node, double> frontier;
+    unordered_map<Node, Node> previous;
+    unordered_map<Node, double> curr_cost;
+
+    frontier.put(start, 0);
+    previous[start] = start;
+    curr_cost[start] = 0;
+
+    while (!frontier.is_empty())
+    {
+        Node current = frontier.get();
+
+        if (current == end)
+        {
+            break;
+        }
+
+        for (Node next : this->get_neighbors(current))
+        {
+            double new_cost = curr_cost[current] + 1;
+            if (curr_cost.find(next) == curr_cost.end() || new_cost < curr_cost[next])
+            {
+                curr_cost[next] = new_cost;
+                double priority = new_cost + this->heuristic(next, end);
+                frontier.put(next, priority);
+                previous[next] = current;
+            }
+        }
+    }
+
+    return this->trace_back(previous, start, end);
+}
+
+double Maze::heuristic(Node a, Node b)
+{
+    return abs(a.x - b.x) + abs(a.y - b.y);
+}
+
+vector<Node> Maze::trace_back(unordered_map<Node, Node> path, Node start, Node end)
+{
+    vector<Node> result;
+    result.push_back(end);
+    Node curr = path[end];
+    while (curr != start)
+    {
+        result.push_back(curr);
+        curr = path[curr];
+    }
+    result.push_back(start);
+    reverse(result.begin(), result.end());
+    return result;
 }

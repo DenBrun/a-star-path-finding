@@ -4,6 +4,8 @@ private:
 public:
     int x, y;
     Node(int x, int y);
-    bool operator==(Node n);
+    Node() = default;
+    bool operator==(Node n) const;
+    bool operator!=(Node n) const;
     Node operator+(const Node other);
 };
