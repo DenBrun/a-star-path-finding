@@ -18,4 +18,5 @@ public:
     void print();
     vector<Node> get_neighbors(Node node);
     vector<Node> find_shortest_path(Node start, Node end);
+    vector<vector<int>> get_maze_vector();
 };

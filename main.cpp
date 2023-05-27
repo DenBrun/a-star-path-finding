@@ -9,12 +9,15 @@ int main(int argc, char const *argv[])
 
     maze.print();
 
-    // vector<Node> neighbors = maze.get_neighbors(Node(8, 3));
-    vector<Node> res = maze.find_shortest_path(Node(1, 1), Node(5, 4));
+    // TODO: add non-existing/wall node checking
+    vector<Node> res = maze.find_shortest_path(Node(1, 6), Node(8, 2));
 
     for (const auto &node : res)
     {
         cout << "(" << node.x << ", " << node.y << ") ";
     }
+    cout << endl;
+
+    parser.printMaze(maze.get_maze_vector(), res);
     return 0;
 }
