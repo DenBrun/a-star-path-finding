@@ -87,6 +87,11 @@ vector<Node> Maze::get_neighbors(Node node)
 
 vector<Node> Maze::find_shortest_path(Node start, Node end)
 {
+    if (!this->in_bounds(start) || !this->passable(start) || !this->in_bounds(end) || !this->passable(end))
+    {
+        throw invalid_argument("A Node can't be a wall or be outside the maze");
+    }
+
     PriorityQueue<Node, double> frontier;
     unordered_map<Node, Node> previous;
     unordered_map<Node, double> curr_cost;
@@ -131,8 +136,13 @@ double Maze::heuristic(Node a, Node b)
 vector<Node> Maze::trace_back(unordered_map<Node, Node> path, Node start, Node end)
 {
     vector<Node> result;
-    result.push_back(end);
-    Node curr = path[end];
+    // result.push_back(end);
+    Node curr = end;
+    if (path.find(end) == path.end())
+    {
+        throw invalid_argument("Path between " + start.to_string() + " and " + end.to_string() + " doesn't exist.");
+    }
+
     while (curr != start)
     {
         result.push_back(curr);

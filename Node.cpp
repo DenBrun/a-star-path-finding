@@ -16,3 +16,8 @@ Node Node::operator+(const Node other)
 {
     return Node(this->x + other.x, this->y + other.y);
 }
+
+std::string Node::to_string()
+{
+    return "(" + std::to_string(this->x) + ", " + std::to_string(this->y) + ")";
+}

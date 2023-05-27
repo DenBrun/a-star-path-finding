@@ -9,7 +9,6 @@ int main(int argc, char const *argv[])
 
     maze.print();
 
-    // TODO: add non-existing/wall node checking
     vector<Node> res = maze.find_shortest_path(Node(1, 6), Node(8, 2));
 
     for (const auto &node : res)
