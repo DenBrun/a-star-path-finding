@@ -112,6 +112,11 @@ char MazeParser::incrementSymbol(char symbol)
 
 void MazeParser::generateAndSaveMaze(int width, int height, const string &filename)
 {
+    if (width <= 2 || height <= 2)
+    {
+        throw invalid_argument("The width and high values must be > 2");
+    }
+
     vector<string> maze(height + 1, string(width + 1, ' ')); // Initialize the maze with spaces
 
     srand(static_cast<unsigned int>(time(nullptr)));
