@@ -1,5 +1,8 @@
 ## Варіант #1. Пошук найкоротшого шляху
 
+![Picture 1](https://github.com/DenBrun/a-star-path-finding/blob/main/screenshots/Screenshot1.png?raw=true)
+![Picture 2](https://github.com/DenBrun/a-star-path-finding/blob/main/screenshots/Screenshot2.png?raw=true)
+
 Знайти в заданому лабіринті найкоротший шлях між двома точками за допомогою алгоритму Дейкстри. Щоб написати цей алгоритм, треба скористатися структурою даних queue (черга), яку треба написати власноруч.
 
 _Складніше завдання (+1 бал):_ Реалізувати [алгоритм А\*](https://en.wikipedia.org/wiki/A*_search_algorithm) з простою пріоритетною чергою – без написання binary heap (або з використанням 3rd party бібліотеки з binary heap. В цьому випадку вам все одно треба написати свою версію звичайної черги).
