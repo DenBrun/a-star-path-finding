@@ -5,17 +5,11 @@ using namespace std;
 int main(int argc, char const *argv[])
 {
     MazeParser parser = MazeParser();
-    Maze maze = parser.parseMazeFile("input.txt");
+    parser.generateAndSaveMaze(40, 20, "maze.txt");
+    Maze maze = parser.parseMazeFile("maze.txt");
 
-    maze.print();
-
-    vector<Node> res = maze.find_shortest_path(Node(1, 6), Node(8, 2));
-
-    for (const auto &node : res)
-    {
-        cout << "(" << node.x << ", " << node.y << ") ";
-    }
-    cout << endl;
+    vector<Node> res = maze.find_shortest_path(Node(1, 6), Node(39, 8));
+    // vector<Node> res = maze.find_shortest_path(Node(1, 6), Node(2, 9));
 
     parser.printMaze(maze.get_maze_vector(), res);
     return 0;

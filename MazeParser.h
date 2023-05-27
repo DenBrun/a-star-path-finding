@@ -9,4 +9,5 @@ private:
 public:
     Maze parseMazeFile(const string &filename);
     void printMaze(const vector<vector<int>> &maze_vector, const vector<Node> &path);
+    void generateAndSaveMaze(int width, int height, const string &filename);
 };
