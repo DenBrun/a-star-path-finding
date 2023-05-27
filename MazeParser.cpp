@@ -2,6 +2,9 @@
 #include <iostream>
 #include <fstream>
 
+#define RESET "\033[0m"
+#define MAGENTA "\033[35m"
+
 Maze MazeParser::parseMazeFile(const string &filename)
 {
     ifstream file(filename);
@@ -71,7 +74,7 @@ void MazeParser::printMaze(const vector<vector<int>> &maze_vector, const vector<
 
     for (const auto &node : path)
     {
-        res[node.y][node.x] = pathSymbol;
+        res[node.y][node.x] = MAGENTA + string(1, pathSymbol) + RESET;
         pathSymbol = this->incrementSymbol(pathSymbol);
     }
 
@@ -97,7 +100,7 @@ char MazeParser::incrementSymbol(char symbol)
     }
     else if (symbol == 'Z')
     {
-        return '0'; // Wrap around to '0' after 'Z'
+        return '0';
     }
     else
     {
