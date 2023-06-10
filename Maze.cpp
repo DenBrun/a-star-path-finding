@@ -103,7 +103,6 @@ vector<Node> Maze::find_shortest_path(Node start, Node end)
     while (!frontier.is_empty())
     {
         Node current = frontier.get();
-        // cout << "Frontier -> " << current.x << " " << current.y << endl;
 
         if (current == end)
         {
@@ -119,10 +118,8 @@ vector<Node> Maze::find_shortest_path(Node start, Node end)
                 double priority = new_cost + this->heuristic(next, end);
                 frontier.put(next, priority);
                 previous[next] = current;
-                // cout << next.x << " " << next.y << " priority: " << priority << endl;
             }
         }
-        // cout << endl;
     }
 
     return this->trace_back(previous, start, end);
@@ -136,7 +133,6 @@ double Maze::heuristic(Node a, Node b)
 vector<Node> Maze::trace_back(unordered_map<Node, Node> path, Node start, Node end)
 {
     vector<Node> result;
-    // result.push_back(end);
     Node curr = end;
     if (path.find(end) == path.end())
     {
